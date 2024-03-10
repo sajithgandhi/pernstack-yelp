@@ -1,0 +1,19 @@
+meta {
+  name: Delete Restaurant
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{baseURL}}/api/v1/restaurants/1
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Subway",
+    "location": "Colorado",
+    "price_range": 4
+  }
+}
