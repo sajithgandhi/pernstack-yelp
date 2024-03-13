@@ -1,17 +1,20 @@
 require('dotenv').config();
 const express = require('express');
-const morgan = require('morgan');
+const cors = require('cors');
+const pino = require('pino-http')();
 
 const db = require('./db');
 
 const PORT = process.env.PORT || 3002;
 
 const app = express();
+app.use(cors());
 app.use(express.json());
-app.use(morgan('dev'));
+app.use(pino);
 
 // Get all restaurants
 app.get('/api/v1/restaurants', async (req, res) => {
+  req.log.info('something');
   try {
     const results = await db.query('SELECT * FROM pernyelp_restaurants');
     res.status(200).json({
